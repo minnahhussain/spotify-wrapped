@@ -5,7 +5,7 @@
 //    the temporary code for a real access token we can use to fetch data
 
 const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-const REDIRECT_URI = window.location.origin + "/callback";
+const REDIRECT_URI = window.location.origin;
 const SCOPES = [
   "user-top-read",
   "streaming",
