@@ -4,10 +4,10 @@ A personal, AI-powered spin on Spotify Wrapped — built in a day to explore wha
 
 ## Features
 
-- 🎧 Shows your top genre, based on your most-listened-to artists
-- ✨ A silly "main character" personality analysis generated from your overall genre mix
-- 🎵 Top songs (last 6 months)
-- 🎤 Top artists (last 6 months)
+- Shows your top genre, based on your most listened to artists
+- A silly main character personality analysis generated from your overall genre mix
+- Top songs (last 6 months)
+- Top artists (last 6 months)
 
 ## How it works
 
