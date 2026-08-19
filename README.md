@@ -1,6 +1,6 @@
 # Minnah's Spotify Wrapped
 
-A personal, AI-powered spin on Spotify Wrapped — built in a day to explore what my own listening data says about me.
+A personal spin on Spotify Wrapped, built in a day to explore what my own listening data says about me. (Just a fun side project used to get back into coding after a while.)
 
 ## Features
 
