@@ -1,17 +1,40 @@
-# Minnah's Spotify Wrapped Website
+# Minnah's Spotify Wrapped
 
-## Description
-Personal website made to mimic Spotify Wrapped listening information.
+A personal, AI-powered spin on Spotify Wrapped — built in a day to explore what my own listening data says about me.
 
-## Features:
-- Shows your top genre
-- A silly main character analysis based on the overall genres you listen to
-- Top songs (from the last 6 months)
-- Top artists (from last 6 months)
+## Features
 
-## How this works:
-1. Log in with spotify. Uses authentication and hashing in order for security, and gains your access token
-2. Uses spotify's api to gain information of users top songs and artists
-3. Uses last fms api to gain information of the artists top genres
-4. Uses a collection to obtain information of most frequently listened to genres (to find top genre)
-5. Uses that same data to as a prompt input into gemini's api, to output the main character analysis
+- 🎧 Shows your top genre, based on your most-listened-to artists
+- ✨ A silly "main character" personality analysis generated from your overall genre mix
+- 🎵 Top songs (last 6 months)
+- 🎤 Top artists (last 6 months)
+
+## How it works
+
+1. **Login** — Authenticates with Spotify using OAuth (PKCE flow), which hashes a security token to safely confirm the request and retrieve an access token.
+2. **Fetch data** — Uses the Spotify Web API to pull the user's top tracks and top artists.
+3. **Genre lookup** — Uses the Last.fm API to look up genre tags for each top artist.
+4. **Top genre calculation** — Tallies how often each genre appears across the user's top artists to determine their single top genre.
+5. **AI personality** — Feeds that same genre breakdown into Google's Gemini API as a prompt, generating a short, personalized "main character" description of the user's music taste.
+
+## Tech stack
+
+- React + Vite
+- Spotify Web API
+- Last.fm API
+- Google Gemini API
+
+## Setup
+
+This project requires your own API keys to run locally.
+
+1. Clone the repo and run `npm install`
+2. Create a `.env` file in the root with:
+   ```
+   VITE_SPOTIFY_CLIENT_ID=your_spotify_client_id
+   VITE_LASTFM_API_KEY=your_lastfm_api_key
+   VITE_GEMINI_API_KEY=your_gemini_api_key
+   ```
+3. Run `npm run dev`
+
+**Note:** Spotify apps in Development Mode only allow up to 5 authenticated users. You'll need to add any test accounts to your app's allowlist in the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard).
