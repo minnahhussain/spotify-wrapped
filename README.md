@@ -1,15 +1,15 @@
-#Minnah's Spotify Wrapped Website
+# Minnah's Spotify Wrapped Website
 
-##Description
+## Description
 Personal website made to mimic Spotify Wrapped listening information.
 
-##Features:
+## Features:
 -Shows your top genre
 -A silly main character analysis based on the overall genres you listen to
 -Top songs (from the last 6 months)
 -Top artists (from last 6 months)
 
-##How this works:
+## How this works:
 1. Log in with spotify. Uses authentication and hashing in order for security, and gains your access token
 2. Uses spotify's api to gain information of users top songs and artists
 3. Uses last fms api to gain information of the artists top genres
