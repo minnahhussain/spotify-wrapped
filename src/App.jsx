@@ -51,7 +51,7 @@ function App() {
     .then((data) => {
       setTopArtists(data.items);
     });
-}, [token]);
+}, [token]); 
 
 useEffect(() => {
   if (topArtists.length === 0) return; //if we have no artists to look up
@@ -180,20 +180,6 @@ return (
               </button>
             </div>
           )}
-          <div className="card">
-            <h2>Your Top Tracks</h2>
-            <ol className="track-list">
-              {topTracks.map((track, index) => (
-                <li key={track.id}>
-                  <span className="counter">{String(index + 1).padStart(2, "0")}</span>
-                  <span>
-                    <div className="track-name">{track.name}</div>
-                    <div className="track-artist">{track.artists[0].name}</div>
-                  </span>
-                </li>
-              ))}
-            </ol>
-          </div>
 
           <div className="card">
             <h2>Your Top Artists</h2>
