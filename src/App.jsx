@@ -57,14 +57,12 @@ useEffect(() => {
   if (topArtists.length === 0) return; //if we have no artists to look up
 
   topArtists.forEach((artist) => { // loop through each artist andd seperate request for each
-    fetch(
-      `https://ws.audioscrobbler.com/2.0/?method=artist.gettoptags&artist=${encodeURIComponent(
-        artist.name
-      )}&api_key=${import.meta.env.VITE_LASTFM_API_KEY}&format=json` //pulls key
-    )
+    // CHANGED: now calls our own /api/lastfm function, which holds the Last.fm key on the server
+    fetch(`/api/lastfm?artist=${encodeURIComponent(artist.name)}`)
       .then((response) => response.json())
       .then((data) => {
-        const tags = data.toptags.tag //ordered most releveant, joins into a string
+        // CHANGED: ?. and ?? so a failed lookup gives "No genres found" instead of crashing
+        const tags = (data.toptags?.tag ?? []) //ordered most releveant, joins into a string
           .slice(0, 2)
           .map((t) => t.name)
           .join(", ");
@@ -106,20 +104,14 @@ useEffect(() => {
       return;
     }
     hasFetchedGemini.current = true;
-  const prompt = `Someone's music taste breaks down into these genres, with how many of their top artists fall into each: ${genreSummary}. 
-Write a short, fun music-personality, but human-like and meaningful description for them, use no hyphens (-), explain it like they are the main character of some kind of story — blend the genres together into one cohesive vibe rather than listing them separately. 
-Give it a punchy 2-4 word title (like "Dreamy Groove Chaser"), then a 1-2 sentence description. 
-Respond ONLY in this exact JSON format, nothing else: {"title": "...", "description": "..."}`;
-fetch(
-  `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`,
-  {
-    method: "POST", //sending data
-    headers: { "Content-Type": "application/json" }, //sending json formatted
-    body: JSON.stringify({ //converts into text string
-      contents: [{ parts: [{ text: prompt }] }], 
-    }),
-  }
-)
+
+// CHANGED: the prompt and API key now live in api/gemini.js.
+// The browser only sends the genre summary to our own endpoint.
+fetch("/api/gemini", {
+  method: "POST", //sending data
+  headers: { "Content-Type": "application/json" }, //sending json formatted
+  body: JSON.stringify({ genreSummary }), //converts into text string
+})
   .then((response) => response.json()) //turns into js data
   .then((data) => {
     if (!data.candidates){
